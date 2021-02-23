@@ -100,7 +100,7 @@ export class HTTPTransport implements Transport {
           resolve(mapHttpMessageToResponse(res));
         });
       });
-      req.on('error', reject);
+      req.on('error', ()=> resolve(""));
       req.end(JSON.stringify(payload));
     });
   }

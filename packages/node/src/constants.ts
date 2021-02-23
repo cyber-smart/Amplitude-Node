@@ -15,7 +15,7 @@ export const DEFAULT_OPTIONS: Options = {
   maxCachedEvents: 16000,
   logLevel: LogLevel.None,
   optOut: false,
-  retryTimeouts: [100, 100, 200, 200, 400, 400, 800, 800, 1600, 1600, 3200, 3200],
+  retryTimeouts: [1000, 1000, 2000, 2000, 5000, 10000, 15000],
   // The client will instantiate the retry/transport classes if not defined
   retryClass: null,
   transportClass: null,
