@@ -1,6 +1,7 @@
 {
   "private": true,
   "version": "1.0.0",
+  "name": "Amplitude",
   "scripts": {
     "build": "lerna run --stream --concurrency 1 --sort build",
     "build:es5": "lerna run --stream --concurrency 1 --sort build:es5",
