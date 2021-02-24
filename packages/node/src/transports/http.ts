@@ -1,4 +1,4 @@
-import { Options, Payload, Response, Transport, TransportOptions } from '@amplitude/types';
+import { Options, Payload, Response, Transport, TransportOptions, Status } from '@amplitude/types';
 import { AsyncQueue, mapJSONToResponse, mapHttpMessageToResponse } from '@amplitude/utils';
 
 import * as http from 'http';
@@ -75,7 +75,7 @@ export class HTTPTransport implements Transport {
 
   /** JSDoc */
   protected async _sendWithModule(payload: Payload): Promise<Response> {
-    return await new Promise<Response>((resolve, reject) => {
+    return await new Promise<Response>((resolve) => {
       const req = this.module.request(this._getRequestOptions(), (res: http.IncomingMessage) => {
         res.setEncoding('utf8');
         let rawData = '';
@@ -100,7 +100,7 @@ export class HTTPTransport implements Transport {
           resolve(mapHttpMessageToResponse(res));
         });
       });
-      req.on('error', ()=> resolve(""));
+      req.on('error', ()=> mapHttpMessageToResponse({status: Status.Failed, statusCode:204}));
       req.end(JSON.stringify(payload));
     });
   }
