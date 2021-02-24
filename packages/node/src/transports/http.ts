@@ -100,7 +100,7 @@ export class HTTPTransport implements Transport {
           resolve(mapHttpMessageToResponse(res));
         });
       });
-      req.on('error', ()=> mapHttpMessageToResponse({status: Status.Failed, statusCode:204}));
+      req.on('error', ()=> resolve({status: Status.Failed, statusCode:204}));
       req.end(JSON.stringify(payload));
     });
   }
